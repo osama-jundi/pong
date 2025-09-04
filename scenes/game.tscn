@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://71h2nbd5bynq"]
+
+[ext_resource type="PackedScene" uid="uid://dl50ji8851x0g" path="res://scenes/pad_1.tscn" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://b00wtws5uahhq" path="res://scenes/pad_2.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://yk7bylan4dwn" path="res://scenes/ball.tscn" id="3_lnu2h"]
+[ext_resource type="Script" uid="uid://coeycmtbwkkej" path="res://scripts/score_2.gd" id="4_iywne"]
+[ext_resource type="Script" uid="uid://b8fmpxalgf1dd" path="res://scripts/score_1.gd" id="5_p57ef"]
+[ext_resource type="Script" uid="uid://b58qb152th1sp" path="res://scripts/gamemannger.gd" id="6_p57ef"]
+[ext_resource type="Script" uid="uid://dyvnu2esvh1i7" path="res://scripts/score_1_.gd" id="7_gee14"]
+[ext_resource type="Script" uid="uid://d3wjj8hc2mw3t" path="res://scripts/score_2_.gd" id="8_0tnpc"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lnu2h"]
+distance = -348.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lbhrr"]
+normal = Vector2(0.0496256, 0.998768)
+distance = -300.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
+size = Vector2(329, 635.998)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
+size = Vector2(270, 638)
+
+[node name="game" type="Node2D"]
+
+[node name="pad1" parent="." instance=ExtResource("1_yqjtg")]
+
+[node name="pad2" parent="." instance=ExtResource("2_lnu2h")]
+position = Vector2(1114, 3)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(557, 24)
+
+[node name="ball" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(549, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_lnu2h")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+rotation = 0.0466701
+shape = SubResource("WorldBoundaryShape2D_lbhrr")
+
+[node name="score_1" type="Area2D" parent="."]
+script = ExtResource("5_p57ef")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="score_1"]
+position = Vector2(1297, 23)
+rotation = -3.15113
+shape = SubResource("RectangleShape2D_lnu2h")
+
+[node name="score_2" type="Area2D" parent="."]
+script = ExtResource("4_iywne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="score_2"]
+position = Vector2(-160, 24)
+shape = SubResource("RectangleShape2D_lbhrr")
+
+[node name="gamemannger" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_p57ef")
+
+[node name="score_1_" type="Label" parent="gamemannger"]
+offset_left = 448.0
+offset_top = -296.0
+offset_right = 488.0
+offset_bottom = -273.0
+script = ExtResource("7_gee14")
+
+[node name="score_2_" type="Label" parent="gamemannger"]
+offset_left = 603.0
+offset_top = -292.0
+offset_right = 643.0
+offset_bottom = -269.0
+script = ExtResource("8_0tnpc")
